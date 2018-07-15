@@ -1,4 +1,4 @@
-package com.giacomoparisi.recyclerdroid_core;
+package com.giacomoparisi.core;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
