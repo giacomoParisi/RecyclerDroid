@@ -23,7 +23,7 @@ abstract class DroidItem {
     /**
      * Return the layout id of the view for this item
      */
-    abstract fun getLayoutId(): Int
+    abstract val getLayoutId: () -> Int
 
     /**
      *
