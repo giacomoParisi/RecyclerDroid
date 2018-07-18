@@ -18,7 +18,7 @@ abstract class DroidItem {
     /**
      * Return the
      */
-    abstract val getViewHolder: (view: View) -> DroidViewHolder<DroidItem>
+    abstract val getViewHolder: (view: View) -> DroidViewHolder<*>
 
     /**
      * Return the layout id of the view for this item

@@ -44,9 +44,9 @@ abstract class DroidViewHolder<D : DroidItem>(view: View) : RecyclerView.ViewHol
     class Factory(
             val id: String,
             private val layoutId: Int,
-            private val factory: (v: View) -> DroidViewHolder<DroidItem>) {
+            private val factory: (v: View) -> DroidViewHolder<*>) {
 
-        fun create(inflater: LayoutInflater, parent: ViewGroup): DroidViewHolder<DroidItem> {
+        fun create(inflater: LayoutInflater, parent: ViewGroup): DroidViewHolder<*> {
             val view = inflater.inflate(layoutId, parent, false)
             return factory(view)
         }
