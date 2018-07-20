@@ -3,6 +3,8 @@ package com.giacomoparisi.recyclerdroid.core
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 /**
  * Created by Giacomo Parisi on 07/07/2017.
@@ -25,6 +27,8 @@ open class DroidAdapter(
         private val layoutInflater: LayoutInflater)
     : RecyclerView.Adapter<DroidViewHolder<*>>() {
 
+    private val observer = PublishSubject.create<DroidAction<*>>()
+
     // Map of the all DroidViewHolder.Factory for the different DroidItems
     private var viewHolderMap: MutableMap<Int, DroidViewHolder.Factory> = mutableMapOf()
 
@@ -44,7 +48,12 @@ open class DroidAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DroidViewHolder<*> {
-        return viewHolderMap[viewType]!!.create(layoutInflater, parent)
+        val viewHolder = this.viewHolderMap[viewType]!!.create(
+                this.layoutInflater,
+                parent
+        )
+        viewHolder.observer = this.observer
+        return viewHolder
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -60,4 +69,6 @@ open class DroidAdapter(
         this.viewHolderMap[this.viewHolderMap.size + 1] = this.itemList[position].getItemViewHolder()
         return this.viewHolderMap.size
     }
+
+    fun observe() = this.observer as Observable<DroidAction<*>>
 }

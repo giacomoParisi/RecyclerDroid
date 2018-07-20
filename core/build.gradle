@@ -27,5 +27,6 @@ android {
 
 dependencies {
     implementation Deps.kotlin_stdlib
+    implementation Deps.rx
     api Deps.recyclerview
 }

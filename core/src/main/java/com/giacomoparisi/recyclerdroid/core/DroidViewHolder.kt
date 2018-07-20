@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.reactivex.subjects.PublishSubject
 
 /**
  * Created by Giacomo Parisi on 10/04/17.
@@ -18,6 +19,8 @@ abstract class DroidViewHolder<D : DroidItem>(view: View) : RecyclerView.ViewHol
 
     // The droid item that this viewHolder bind
     var data: D? = null
+
+    lateinit var observer: PublishSubject<DroidAction<*>>
 
     /**
      *

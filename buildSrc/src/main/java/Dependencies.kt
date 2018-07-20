@@ -11,6 +11,8 @@ object Versions {
     const val kotlin = "1.2.51"
     //** SUPPORT LIB **//
     const val supportLib = "27.1.1"
+    //** RX **//
+    const val rx = "2.1.16"
     //** DAGGER **//
     const val dagger = "2.16"
 }
@@ -22,6 +24,9 @@ object Deps {
 
     //** SUPPORT LIB **//
     const val recyclerview = "com.android.support:recyclerview-v7:${Versions.supportLib}"
+
+    //** RX **//
+    const val rx = "io.reactivex.rxjava2:rxjava:${Versions.rx}"
 
     //** DAGGER **//
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
