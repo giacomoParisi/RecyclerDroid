@@ -20,7 +20,7 @@ abstract class DroidViewHolder<D : DroidItem>(view: View) : RecyclerView.ViewHol
     // The droid item that this viewHolder bind
     var data: D? = null
 
-    lateinit var observer: PublishSubject<DroidAction<*>>
+    lateinit var observer: PublishSubject<DroidAction<DroidItem>>
 
     /**
      *

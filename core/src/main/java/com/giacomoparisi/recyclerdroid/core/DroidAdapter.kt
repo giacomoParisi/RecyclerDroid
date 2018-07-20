@@ -27,7 +27,7 @@ open class DroidAdapter(
         private val layoutInflater: LayoutInflater)
     : RecyclerView.Adapter<DroidViewHolder<*>>() {
 
-    private val observer = PublishSubject.create<DroidAction<*>>()
+    private val observer = PublishSubject.create<DroidAction<DroidItem>>()
 
     // Map of the all DroidViewHolder.Factory for the different DroidItems
     private var viewHolderMap: MutableMap<Int, DroidViewHolder.Factory> = mutableMapOf()
@@ -70,5 +70,5 @@ open class DroidAdapter(
         return this.viewHolderMap.size
     }
 
-    fun observe() = this.observer as Observable<DroidAction<*>>
+    fun observe() = this.observer as Observable<DroidAction<DroidItem>>
 }
