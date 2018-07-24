@@ -1,74 +1,60 @@
 package com.giacomoparisi.recyclerdroid.core
 
-import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
+import android.support.v7.recyclerview.extensions.ListAdapter
+import android.support.v7.util.DiffUtil
 import android.view.ViewGroup
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 
 /**
  * Created by Giacomo Parisi on 07/07/2017.
  * https://github.com/giacomoParisi
  */
 
-/**
- *
- * The recyclerView.Adapter that populate the recyclerView with DroidItems
- * and bind them with the data.
- * The adapter support the following features:
- *
- * - Different DroidItem (with different DroidViewHolder.Factory)
- *
- * @param itemList The list of DroidItem for populate the recyclerView
- * @param layoutInflater The layoutInflater reference for layout inflating
- */
-open class DroidAdapter(
-        private var itemList: List<DroidItem>,
-        private val layoutInflater: LayoutInflater)
-    : RecyclerView.Adapter<DroidViewHolder<*>>() {
+typealias ViewHolderFactory<T> = (ViewGroup) -> DroidViewHolder<T>
 
-    private val observer = PublishSubject.create<DroidAction<DroidItem>>()
+class DroidAdapter<T : Any>(
+        defaultFactory: ViewHolderFactory<out T>,
+        areItemsTheSame: (T, T) -> Boolean,
+        areContentsTheSame: (T, T) -> Boolean,
+        getChangePayload: (T, T) -> Any? = { _, _ -> null }
+) : ListAdapter<T, DroidViewHolder<T>>(object : DiffUtil.ItemCallback<T>() {
+    override fun areItemsTheSame(oldItem: T, newItem: T) = areItemsTheSame(oldItem, newItem)
 
-    // Map of the all DroidViewHolder.Factory for the different DroidItems
-    private var viewHolderMap: MutableMap<Int, DroidViewHolder.Factory> = mutableMapOf()
+    override fun areContentsTheSame(oldItem: T, newItem: T) = areContentsTheSame(oldItem, newItem)
 
-    fun getItems() = this.itemList
+    override fun getChangePayload(oldItem: T, newItem: T): Any? = getChangePayload(oldItem, newItem)
+}) {
 
-    fun setItems(items: List<DroidItem>) {
-        this.itemList = items
-        this.notifyDataSetChanged()
-    }
-
-    override fun onBindViewHolder(holder: DroidViewHolder<*>, position: Int) {
-        holder.bind(this.itemList[position])
-    }
-
-    override fun getItemCount(): Int {
-        return this.itemList.size
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DroidViewHolder<*> {
-        val viewHolder = this.viewHolderMap[viewType]!!.create(
-                this.layoutInflater,
-                parent
-        )
-        viewHolder.observer = this.observer
-        return viewHolder
-    }
+    private val factories = mutableListOf({ _: Int, _: T -> true } to defaultFactory)
 
     override fun getItemViewType(position: Int): Int {
-
-        val viewHolderId = this.itemList[position].getItemViewHolder().id
-
-        for ((key, value) in this.viewHolderMap) {
-            if (value.id == viewHolderId) {
-                return key
+        factories.forEachIndexed { i, pair ->
+            if (pair.first(position, getItem(position))) {
+                return i
             }
         }
 
-        this.viewHolderMap[this.viewHolderMap.size + 1] = this.itemList[position].getItemViewHolder()
-        return this.viewHolderMap.size
+        throw RuntimeException("Error defining default factory")
     }
 
-    fun observe() = this.observer as Observable<DroidAction<DroidItem>>
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DroidViewHolder<T> = factories[viewType].second(parent) as DroidViewHolder<T>
+
+    override fun onBindViewHolder(holder: DroidViewHolder<T>, position: Int) {
+        val item = getItem(position)
+        holder.item = item
+        holder.bind(item)
+    }
+
+    override fun onBindViewHolder(holder: DroidViewHolder<T>, position: Int, payloads: MutableList<Any>) {
+        val item = getItem(position)
+        holder.item = item
+        holder.bind(item)
+    }
+
+    fun addItemType(selector: (Int, T) -> Boolean, factory: ViewHolderFactory<out T>) = apply {
+        factories.add(factories.size - 1, selector to factory)
+    }
+
+    inline fun <reified S : T> addItemType(noinline factory: ViewHolderFactory<S>) = apply {
+        addItemType({ _: Int, item: T -> item is S }, factory)
+    }
 }
