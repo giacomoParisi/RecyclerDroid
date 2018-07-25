@@ -1,8 +1,8 @@
 package com.giacomoparisi.recyclerdroid.core
 
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.util.DiffUtil
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 
 /**
  * Created by Giacomo Parisi on 07/07/2017.
