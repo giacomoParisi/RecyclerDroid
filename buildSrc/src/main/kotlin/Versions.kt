@@ -7,7 +7,7 @@ import kotlin.String
  *
  * YOU are responsible for updating manually the dependency version. */
 object Versions {
-    const val recyclerview: String = "1.0.0-beta01" //available: "1.0.0" 
+    const val recyclerview: String = "1.0.0" 
 
     const val aapt2: String = "3.2.1-4818971" 
 
@@ -19,7 +19,7 @@ object Versions {
 
     const val jmfayard_github_io_gradle_kotlin_dsl_libs_gradle_plugin: String = "0.2.6" 
 
-    const val org_jetbrains_kotlin: String = "1.2.51" //available: "1.3.0" 
+    const val org_jetbrains_kotlin: String = "1.3.0" 
 
     /**
      *
