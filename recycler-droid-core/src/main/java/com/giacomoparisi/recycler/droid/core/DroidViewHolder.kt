@@ -1,4 +1,4 @@
-package com.giacomoparisi.recyclerdroid.core
+package com.giacomoparisi.recycler.droid.core
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,4 +1,4 @@
-package com.giacomoparisi.recyclerdroid.core
+package com.giacomoparisi.recycler.droid.core
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
