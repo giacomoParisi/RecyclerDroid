@@ -7,12 +7,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion Config.compile_sdk
+    compileSdkVersion AndroidConfig.compile_sdk
     defaultConfig {
-        minSdkVersion Config.min_sdk
-        targetSdkVersion Config.target_sdk
-        versionCode Config.version_code
-        versionName Config.version_name
+        minSdkVersion AndroidConfig.min_sdk
+        targetSdkVersion AndroidConfig.target_sdk
+        versionCode AndroidConfig.version_code
+        versionName AndroidConfig.version_name
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,7 +26,6 @@ android {
 }
 
 dependencies {
-    implementation Deps.kotlin_stdlib
-    implementation Deps.rx
-    api Deps.recyclerview
+    implementation Libs.kotlin_stdlib_jdk7
+    implementation Libs.recyclerview
 }
