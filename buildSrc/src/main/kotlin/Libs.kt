@@ -29,8 +29,17 @@ object Libs {
     const val android_maven_gradle_plugin: String =
             "com.github.dcendents:android-maven-gradle-plugin:" + Versions.android_maven_gradle_plugin
 
+    const val gradle_bintray_plugin: String =
+            "com.jfrog.bintray.gradle:gradle-bintray-plugin:" + Versions.gradle_bintray_plugin
+
     const val jmfayard_github_io_gradle_kotlin_dsl_libs_gradle_plugin: String =
             "jmfayard.github.io.gradle-kotlin-dsl-libs:jmfayard.github.io.gradle-kotlin-dsl-libs.gradle.plugin:" + Versions.jmfayard_github_io_gradle_kotlin_dsl_libs_gradle_plugin
+
+    const val dokka_android_gradle_plugin: String =
+            "org.jetbrains.dokka:dokka-android-gradle-plugin:" + Versions.org_jetbrains_dokka
+
+    const val dokka_gradle_plugin: String =
+            "org.jetbrains.dokka:dokka-gradle-plugin:" + Versions.org_jetbrains_dokka
 
     /**
      * [kotlin-android-extensions website](https://kotlinlang.org/) */

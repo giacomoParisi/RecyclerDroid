@@ -17,7 +17,11 @@ object Versions {
 
     const val android_maven_gradle_plugin: String = "2.1" 
 
+    const val gradle_bintray_plugin: String = "1.8.4" 
+
     const val jmfayard_github_io_gradle_kotlin_dsl_libs_gradle_plugin: String = "0.2.6" 
+
+    const val org_jetbrains_dokka: String = "0.9.17" 
 
     const val org_jetbrains_kotlin: String = "1.3.10" 
 
