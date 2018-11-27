@@ -19,7 +19,7 @@ object Versions {
 
     const val jmfayard_github_io_gradle_kotlin_dsl_libs_gradle_plugin: String = "0.2.6" 
 
-    const val org_jetbrains_kotlin: String = "1.3.0" 
+    const val org_jetbrains_kotlin: String = "1.3.10" 
 
     /**
      *
@@ -27,12 +27,12 @@ object Versions {
      *      ./gradle/wrapper/gradle-wrapper.properties
      */
     object Gradle {
-        const val runningVersion: String = "4.9-rc-1"
+        const val runningVersion: String = "4.10.2"
 
-        const val currentVersion: String = "4.10.2"
+        const val currentVersion: String = "5.0"
 
-        const val nightlyVersion: String = "5.1-20181109000105+0000"
+        const val nightlyVersion: String = "5.1-20181127143359+0000"
 
-        const val releaseCandidate: String = "5.0-rc-1"
+        const val releaseCandidate: String = ""
     }
 }
