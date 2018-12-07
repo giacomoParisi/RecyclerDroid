@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 
 typealias ViewHolderFactory<T> = (ViewGroup) -> DroidViewHolder<T>
 
-class DroidAdapter<T : Any>(
+open class DroidAdapter<T : Any>(
         defaultFactory: ViewHolderFactory<out T>,
         areItemsTheSame: (T, T) -> Boolean,
         areContentsTheSame: (T, T) -> Boolean,
