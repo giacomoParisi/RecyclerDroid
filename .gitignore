@@ -18,7 +18,6 @@ out/
 .gradle
 build/
 signing.gradle
-gradle.properties
 
 # Local configuration file (sdk path, etc)
 local.properties

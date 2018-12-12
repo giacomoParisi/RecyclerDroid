@@ -57,4 +57,12 @@ open class DroidAdapter<T : Any>(
     inline fun <reified S : T> addItemType(noinline factory: ViewHolderFactory<S>) = apply {
         addItemType({ _: Int, item: T -> item is S }, factory)
     }
+
+    fun getItems(): List<T> {
+        val list = mutableListOf<T>()
+        for (i in 0..(this.itemCount - 1)) {
+            list.add(this.getItem(i))
+        }
+        return list.toList()
+    }
 }
