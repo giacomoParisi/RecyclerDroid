@@ -9,11 +9,9 @@ import kotlin.String
 object Versions {
     const val recyclerview: String = "1.0.0" 
 
-    const val aapt2: String = "3.2.1-4818971" 
+    const val com_android_tools_build_gradle: String = "3.3.0" 
 
-    const val com_android_tools_build_gradle: String = "3.2.1" 
-
-    const val lint_gradle: String = "26.2.1" 
+    const val lint_gradle: String = "26.3.0" 
 
     const val android_maven_gradle_plugin: String = "2.1" 
 
@@ -23,7 +21,7 @@ object Versions {
 
     const val org_jetbrains_dokka: String = "0.9.17" 
 
-    const val org_jetbrains_kotlin: String = "1.3.10" 
+    const val org_jetbrains_kotlin: String = "1.3.11" 
 
     /**
      *
@@ -33,9 +31,9 @@ object Versions {
     object Gradle {
         const val runningVersion: String = "4.10.2"
 
-        const val currentVersion: String = "5.0"
+        const val currentVersion: String = "5.1.1"
 
-        const val nightlyVersion: String = "5.1-20181127143359+0000"
+        const val nightlyVersion: String = "5.2-20190115022437+0000"
 
         const val releaseCandidate: String = ""
     }
