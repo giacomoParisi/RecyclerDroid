@@ -38,6 +38,11 @@ object Libs {
             "org.jetbrains.dokka:dokka-gradle-plugin:" + Versions.org_jetbrains_dokka
 
     /**
+     * [kotlin-android-extensions-runtime website](https://kotlinlang.org/) */
+    const val kotlin_android_extensions_runtime: String =
+            "org.jetbrains.kotlin:kotlin-android-extensions-runtime:" + Versions.org_jetbrains_kotlin
+
+    /**
      * [kotlin-android-extensions website](https://kotlinlang.org/) */
     const val kotlin_android_extensions: String =
             "org.jetbrains.kotlin:kotlin-android-extensions:" + Versions.org_jetbrains_kotlin
