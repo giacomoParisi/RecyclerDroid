@@ -41,13 +41,13 @@ open class DroidAdapter<T : Any>(
     override fun onBindViewHolder(holder: DroidViewHolder<T>, position: Int) {
         val item = getItem(position)
         holder.item = item
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     override fun onBindViewHolder(holder: DroidViewHolder<T>, position: Int, payloads: MutableList<Any>) {
         val item = getItem(position)
         holder.item = item
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     fun addItemType(selector: (Int, T) -> Boolean, factory: ViewHolderFactory<out T>) = apply {
@@ -60,7 +60,7 @@ open class DroidAdapter<T : Any>(
 
     fun getItems(): List<T> {
         val list = mutableListOf<T>()
-        for (i in 0..(this.itemCount - 1)) {
+        for (i in 0 until this.itemCount) {
             list.add(this.getItem(i))
         }
         return list.toList()
