@@ -64,6 +64,15 @@ open class DroidAdapter<T : Any>(
         val item = getItem(position)
         holder.item = item
         holder.bind(item, position)
+
+        // dispatch events
+
+        when(position) {
+            0 -> subject.onNext(DroidAdapterEvent.FirstItemCreated)
+            itemCount - 1 -> subject.onNext(DroidAdapterEvent.LastItemCreated)
+        }
+
+        subject.onNext(DroidAdapterEvent.ItemCreated(position))
     }
 
     fun addItemType(selector: (Int, T) -> Boolean, factory: ViewHolderFactory<out T>) = apply {
