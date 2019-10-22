@@ -28,6 +28,8 @@ object Versions {
 
     const val lint_gradle: String = "26.5.1"
 
+    const val rxjava: String = "2.2.13"
+
     const val aapt2: String = "3.5.1-5435860"
 
     /**

@@ -3,6 +3,8 @@ package com.giacomoparisi.recycler.droid.core
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 /**
  * Created by Giacomo Parisi on 07/07/2017.
@@ -17,12 +19,15 @@ open class DroidAdapter<T : Any>(
         areContentsTheSame: (T, T) -> Boolean,
         getChangePayload: (T, T) -> Any? = { _, _ -> null }
 ) : ListAdapter<T, DroidViewHolder<T>>(object : DiffUtil.ItemCallback<T>() {
+
     override fun areItemsTheSame(oldItem: T, newItem: T) = areItemsTheSame(oldItem, newItem)
 
     override fun areContentsTheSame(oldItem: T, newItem: T) = areContentsTheSame(oldItem, newItem)
 
     override fun getChangePayload(oldItem: T, newItem: T): Any? = getChangePayload(oldItem, newItem)
 }) {
+
+    private val subject = PublishSubject.create<DroidAdapterEvent>()
 
     private val factories = mutableListOf({ _: Int, _: T -> true } to defaultFactory)
 
@@ -44,6 +49,15 @@ open class DroidAdapter<T : Any>(
         val item = getItem(position)
         holder.item = item
         holder.bind(item, position)
+
+        // dispatch events
+
+        when(position) {
+            0 -> subject.onNext(DroidAdapterEvent.FirstItemCreated)
+            itemCount - 1 -> subject.onNext(DroidAdapterEvent.LastItemCreated)
+        }
+
+        subject.onNext(DroidAdapterEvent.ItemCreated(position))
     }
 
     override fun onBindViewHolder(holder: DroidViewHolder<T>, position: Int, payloads: MutableList<Any>) {
@@ -67,4 +81,6 @@ open class DroidAdapter<T : Any>(
         }
         return list.toList()
     }
+
+    fun observe(): Observable<DroidAdapterEvent> = this.subject
 }

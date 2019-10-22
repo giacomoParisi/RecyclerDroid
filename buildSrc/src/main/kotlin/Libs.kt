@@ -76,6 +76,11 @@ object Libs {
     const val lint_gradle: String = "com.android.tools.lint:lint-gradle:" + Versions.lint_gradle
 
     /**
+     * https://github.com/ReactiveX/RxJava
+     */
+    const val rxjava: String = "io.reactivex.rxjava2:rxjava:" + Versions.rxjava
+
+    /**
      * https://developer.android.com/studio
      */
     const val aapt2: String = "com.android.tools.build:aapt2:" + Versions.aapt2

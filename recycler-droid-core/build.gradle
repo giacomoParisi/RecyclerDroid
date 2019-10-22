@@ -25,6 +25,7 @@ android {
 dependencies {
     implementation Libs.kotlin_stdlib_jdk7
     implementation Libs.recyclerview
+    implementation Libs.rxjava
 }
 
 
