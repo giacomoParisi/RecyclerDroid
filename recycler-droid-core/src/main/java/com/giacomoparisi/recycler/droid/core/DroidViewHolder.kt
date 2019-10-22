@@ -22,6 +22,7 @@ private constructor(itemView: View) :
             this(factory(LayoutInflater.from(parent.context), parent, false))
 
     lateinit var item: T
+    lateinit var adapter: DroidAdapter<T>
 
     abstract fun bind(t: T, position: Int)
 
@@ -35,4 +36,8 @@ private constructor(itemView: View) :
 
     fun <T : View> Int.getView() =
             this@DroidViewHolder.itemView.findViewById<T>(this)
+
+    fun getItems() = this.adapter.getItems()
+
+    fun getListSize() = this.getItems().count()
 }

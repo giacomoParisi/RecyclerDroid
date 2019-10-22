@@ -36,7 +36,9 @@ open class DroidAdapter<T : Any>(
         throw RuntimeException("Error defining default factory")
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DroidViewHolder<T> = factories[viewType].second(parent) as DroidViewHolder<T>
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DroidViewHolder<T> =
+            (factories[viewType].second(parent) as DroidViewHolder<T>)
+                    .also { it.adapter = this }
 
     override fun onBindViewHolder(holder: DroidViewHolder<T>, position: Int) {
         val item = getItem(position)
