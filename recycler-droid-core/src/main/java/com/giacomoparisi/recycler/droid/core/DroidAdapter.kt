@@ -27,8 +27,6 @@ open class DroidAdapter<T : Any>(
     override fun getChangePayload(oldItem: T, newItem: T): Any? = getChangePayload(oldItem, newItem)
 }) {
 
-    private val subject = PublishSubject.create<DroidAdapterEvent>()
-
     private val factories = mutableListOf({ _: Int, _: T -> true } to defaultFactory)
 
     override fun getItemViewType(position: Int): Int {
@@ -49,30 +47,12 @@ open class DroidAdapter<T : Any>(
         val item = getItem(position)
         holder.item = item
         holder.bind(item, position)
-
-        // dispatch events
-
-        when(position) {
-            0 -> subject.onNext(DroidAdapterEvent.FirstItemCreated)
-            itemCount - 1 -> subject.onNext(DroidAdapterEvent.LastItemCreated)
-        }
-
-        subject.onNext(DroidAdapterEvent.ItemCreated(position))
     }
 
     override fun onBindViewHolder(holder: DroidViewHolder<T>, position: Int, payloads: MutableList<Any>) {
         val item = getItem(position)
         holder.item = item
         holder.bind(item, position)
-
-        // dispatch events
-
-        when(position) {
-            0 -> subject.onNext(DroidAdapterEvent.FirstItemCreated)
-            itemCount - 1 -> subject.onNext(DroidAdapterEvent.LastItemCreated)
-        }
-
-        subject.onNext(DroidAdapterEvent.ItemCreated(position))
     }
 
     fun addItemType(selector: (Int, T) -> Boolean, factory: ViewHolderFactory<out T>) = apply {
@@ -90,6 +70,4 @@ open class DroidAdapter<T : Any>(
         }
         return list.toList()
     }
-
-    fun observe(): Observable<DroidAdapterEvent> = this.subject
 }
