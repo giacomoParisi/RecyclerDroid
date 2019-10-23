@@ -11,7 +11,7 @@ import com.giacomoparisi.recycler.droid.core.DroidViewHolder
  *
  * An empty viewHolder that allows to render a layout that does not need any configuration
  */
-class EmptyViewHolder<T : Any>(parent: ViewGroup, @LayoutRes layoutId: Int) : DroidViewHolder<T>(
+open class EmptyViewHolder<T : Any>(parent: ViewGroup, @LayoutRes layoutId: Int) : DroidViewHolder<T>(
         parent,
         { layoutInflater, viewGroup, b ->
             layoutInflater.inflate(
