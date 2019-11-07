@@ -28,13 +28,13 @@ private constructor(itemView: View) :
 
     val context: Context get() = this.itemView.context
 
-    fun getString(@StringRes id: Int) =
+    fun getString(@StringRes id: Int): String =
             this.context.getString(id)
 
     fun getColor(@ColorRes id: Int) =
             ContextCompat.getColor(this.context, id)
 
-    fun <T : View> Int.getView() =
+    fun <T : View> Int.getView(): View =
             this@DroidViewHolder.itemView.findViewById<T>(this)
 
     fun getItems() = this.adapter.getItems()
