@@ -34,8 +34,8 @@ private constructor(itemView: View) :
     fun getColor(@ColorRes id: Int) =
             ContextCompat.getColor(this.context, id)
 
-    fun <T : View> Int.getView(): View =
-            this@DroidViewHolder.itemView.findViewById<T>(this)
+    fun <T : View> Int.getView(): T =
+            this@DroidViewHolder.itemView.findViewById(this)
 
     fun getItems() = this.adapter.getItems()
 
