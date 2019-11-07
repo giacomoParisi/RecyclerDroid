@@ -4,7 +4,7 @@ import com.giacomoparisi.recycler.droid.core.DroidAdapter
 import com.giacomoparisi.recycler.droid.core.ViewHolderFactory
 
 class StableDroidAdapter<T : Any>(
-        val getId: (Int) -> Long,
+        val getId: (StableDroidAdapter<T>, Int) -> Long,
         defaultFactory: ViewHolderFactory<out T>,
         areItemsTheSame: (T, T) -> Boolean,
         areContentsTheSame: (T, T) -> Boolean,
@@ -17,6 +17,6 @@ class StableDroidAdapter<T : Any>(
     }
 
     override fun getItemId(position: Int): Long {
-        return this.getId(position)
+        return this.getId(this, position)
     }
 }
