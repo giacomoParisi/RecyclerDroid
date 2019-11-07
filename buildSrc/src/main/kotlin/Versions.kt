@@ -16,7 +16,7 @@ object Versions {
 
     const val org_jetbrains_dokka: String = "0.9.18"
 
-    const val com_android_tools_build_gradle: String = "3.5.1"
+    const val com_android_tools_build_gradle: String = "3.5.2"
 
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.7.0"
 
@@ -26,18 +26,20 @@ object Versions {
 
     const val recyclerview: String = "1.0.0"
 
-    const val lint_gradle: String = "26.5.1"
+    const val lint_gradle: String = "26.5.2"
 
-    const val rxjava: String = "2.2.13"
+    const val rxandroid: String = "2.1.1"
 
-    const val aapt2: String = "3.5.1-5435860"
+    const val rxjava: String = "2.2.14"
+
+    const val aapt2: String = "3.5.2-5435860"
 
     /**
      * Current version: "5.6.3"
      * See issue 19: How to update Gradle itself?
      * https://github.com/jmfayard/buildSrcVersions/issues/19
      */
-    const val gradleLatestVersion: String = "5.6.3"
+    const val gradleLatestVersion: String = "5.6.4"
 }
 
 /**
