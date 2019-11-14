@@ -3,8 +3,6 @@ package com.giacomoparisi.recycler.droid.core
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 
 /**
  * Created by Giacomo Parisi on 07/07/2017.
@@ -52,7 +50,11 @@ open class DroidAdapter<T : Any>(
     override fun onBindViewHolder(holder: DroidViewHolder<T>, position: Int, payloads: MutableList<Any>) {
         val item = getItem(position)
         holder.item = item
-        holder.bind(item, position, payloads)
+
+        if (payloads.isEmpty())
+            holder.bind(item, position, payloads)
+        else
+            holder.bind(item, position)
     }
 
     fun addItemType(selector: (Int, T) -> Boolean, factory: ViewHolderFactory<out T>) = apply {
