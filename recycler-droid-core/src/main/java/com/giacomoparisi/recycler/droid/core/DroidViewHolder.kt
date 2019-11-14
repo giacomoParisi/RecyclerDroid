@@ -26,7 +26,7 @@ private constructor(itemView: View) :
 
     abstract fun bind(t: T, position: Int)
 
-    fun bind(t: T, position: Int, payloads: MutableList<Any>) {}
+    open fun bind(t: T, position: Int, payloads: MutableList<Any>) {}
 
     val context: Context get() = this.itemView.context
 
