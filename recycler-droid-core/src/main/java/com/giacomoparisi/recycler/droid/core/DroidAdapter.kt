@@ -52,9 +52,9 @@ open class DroidAdapter<T : Any>(
         holder.item = item
 
         if (payloads.isEmpty())
-            holder.bind(item, position, payloads)
-        else
             holder.bind(item, position)
+        else
+            holder.bind(item, position, payloads)
     }
 
     fun addItemType(selector: (Int, T) -> Boolean, factory: ViewHolderFactory<out T>) = apply {
