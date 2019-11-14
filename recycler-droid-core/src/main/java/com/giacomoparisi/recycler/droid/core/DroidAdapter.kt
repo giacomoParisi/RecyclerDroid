@@ -52,7 +52,7 @@ open class DroidAdapter<T : Any>(
     override fun onBindViewHolder(holder: DroidViewHolder<T>, position: Int, payloads: MutableList<Any>) {
         val item = getItem(position)
         holder.item = item
-        holder.bind(item, position)
+        holder.bind(item, position, payloads)
     }
 
     fun addItemType(selector: (Int, T) -> Boolean, factory: ViewHolderFactory<out T>) = apply {
