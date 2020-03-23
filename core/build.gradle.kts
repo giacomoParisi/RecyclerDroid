@@ -71,7 +71,7 @@ publishing {
             artifactId = artifactName
             version = artifactVersion
 
-            artifact("$buildDir/outputs/aar/${artifactId}-release.aar")
+            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
             artifact(tasks.getByName("sourcesJar"))
 
             pom {
