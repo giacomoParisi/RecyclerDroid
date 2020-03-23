@@ -30,7 +30,7 @@ open class DroidAdapter<T : Any>(
 
     /* ---- PAGING ----- */
 
-    private var pageListener: (() -> Unit)? = null
+    var pageListener: (() -> Unit)? = null
     private var lastItemIndex: Int = -1
 
     override fun getItemViewType(position: Int): Int {
