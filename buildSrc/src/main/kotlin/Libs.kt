@@ -66,7 +66,7 @@ object Libs {
             Versions.gradle_bintray_plugin
 
     /**
-     * http://developer.android.com/tools/extras/support-library.html
+     * https://developer.android.com/jetpack/androidx
      */
     const val recyclerview: String = "androidx.recyclerview:recyclerview:" + Versions.recyclerview
 
