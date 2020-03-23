@@ -10,8 +10,8 @@ object Library {
     const val githubRepo = "giacomoParisi/recycler-droid"
     const val githubReadme = "README.md"
 
-    const val pomLicenseName = "The Apache Software License, Version 2.0"
-    const val pomLicenseUrl = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+    const val pomLicenseName = "MIT"
+    const val pomLicenseUrl = "http://opensource.org/licenses/MIT"
 
     const val pomDeveloperId = "giacomo-parisi"
     const val pomDeveloperName = "Giacomo Parisi"
