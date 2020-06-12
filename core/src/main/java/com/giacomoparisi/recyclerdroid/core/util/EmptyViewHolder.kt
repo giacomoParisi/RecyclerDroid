@@ -2,6 +2,7 @@ package com.giacomoparisi.recyclerdroid.core.util
 
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import com.giacomoparisi.recyclerdroid.core.DroidItem
 import com.giacomoparisi.recyclerdroid.core.DroidViewHolder
 
 /**
@@ -11,7 +12,10 @@ import com.giacomoparisi.recyclerdroid.core.DroidViewHolder
  *
  * An empty viewHolder that allows to render a layout that does not need any configuration
  */
-open class EmptyViewHolder<T : Any>(parent: ViewGroup, @LayoutRes layoutId: Int) : DroidViewHolder<T>(
+open class EmptyViewHolder<T : DroidItem>(
+        parent: ViewGroup,
+        @LayoutRes layoutId: Int
+) : DroidViewHolder<T, Unit>(
         parent,
         { layoutInflater, viewGroup, b ->
             layoutInflater.inflate(

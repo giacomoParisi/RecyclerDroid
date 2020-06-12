@@ -12,34 +12,30 @@ import org.gradle.plugin.use.PluginDependencySpec
  * YOU are responsible for updating manually the dependency version.
  */
 object Versions {
-    const val org_jetbrains_kotlin: String = "1.3.70" // available: "1.3.70"
+    const val org_jetbrains_kotlin: String = "1.3.70" // available: "1.3.72"
 
     const val org_jetbrains_dokka: String = "0.9.18"
 
-    const val com_android_tools_build_gradle: String = "3.6.1" // available: "3.6.1"
+    const val com_android_tools_build_gradle: String = "3.6.1" // available: "4.0.0"
 
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.7.0"
 
     const val android_maven_gradle_plugin: String = "2.1"
 
-    const val gradle_bintray_plugin: String = "1.8.4"
+    const val gradle_bintray_plugin: String = "1.8.4" // available: "1.8.5"
 
-    const val recyclerview: String = "1.1.0" // available: "1.1.0"
+    const val recyclerview: String = "1.1.0"
 
-    const val lint_gradle: String = "26.6.1" // available: "26.6.1"
+    const val lint_gradle: String = "26.6.1" // available: "27.0.0"
 
-    const val rxandroid: String = "2.1.1"
-
-    const val rxjava: String = "2.2.18" // available: "2.2.18"
-
-    const val aapt2: String = "3.6.1-6040484" // available: "3.6.1-6040484"
+    const val aapt2: String = "3.6.1-6040484" // available: "4.0.0-6051327"
 
     /**
-     * Current version: "5.6.3"
+     * Current version: "6.2.2"
      * See issue 19: How to update Gradle itself?
      * https://github.com/jmfayard/buildSrcVersions/issues/19
      */
-    const val gradleLatestVersion: String = "6.2.2"
+    const val gradleLatestVersion: String = "6.4.1"
 }
 
 /**

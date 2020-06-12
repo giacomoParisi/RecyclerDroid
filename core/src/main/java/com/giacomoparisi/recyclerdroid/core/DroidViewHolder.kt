@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
  * https://github.com/giacomoParisi
  */
 
-abstract class DroidViewHolder<T : Any>
+abstract class DroidViewHolder<T : DroidItem, P>
 private constructor(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
@@ -26,20 +26,33 @@ private constructor(itemView: View) :
 
     abstract fun bind(t: T, position: Int)
 
-    open fun bind(t: T, position: Int, payloads: MutableList<Any>) {}
+    fun bindRawPayload(t: T, position: Int, payloads: List<Any>) {
 
-    val context: Context get() = this.itemView.context
+        val payloadObjects  = payloads.flatMap { (it as? List<P>).orEmpty() }
+
+        if(payloadObjects.isEmpty())
+            bind(t, position)
+        else
+            bind(t, position, payloadObjects)
+    }
+
+    open fun bind(t: T, position: Int, payloads: List<P>) {}
+
+    val context: Context get() = itemView.context
 
     fun getString(@StringRes id: Int): String =
-            this.context.getString(id)
+            context.getString(id)
+
+    fun getString(@StringRes id: Int,  vararg formatArgs: Any): String =
+            context.getString(id, formatArgs)
 
     fun getColor(@ColorRes id: Int) =
-            ContextCompat.getColor(this.context, id)
+            ContextCompat.getColor(context, id)
 
     fun <T : View> Int.getView(): T =
             this@DroidViewHolder.itemView.findViewById(this)
 
-    fun getItems() = this.adapter.getItems()
+    fun getItems() = adapter.getItems()
 
-    fun getListSize() = this.getItems().count()
+    fun getListSize() = getItems().count()
 }
