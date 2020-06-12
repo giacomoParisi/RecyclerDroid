@@ -9,25 +9,26 @@ import androidx.recyclerview.widget.ListAdapter
  * https://github.com/giacomoParisi
  */
 
-data class ViewHolderFactory<T: DroidItem>(
-        val factory: (ViewGroup) -> DroidViewHolder<T, *>,
-        val selector: (Int, T) -> Boolean
+data class ViewHolderFactory(
+        val factory: (ViewGroup) -> DroidViewHolder<DroidItem, *>,
+        val selector: (Int, DroidItem) -> Boolean
 )
 
-open class DroidAdapter<T : DroidItem>(
-        private vararg val factories: ViewHolderFactory<T>
-) : ListAdapter<T, DroidViewHolder<T, *>>(object : DiffUtil.ItemCallback<T>() {
+open class DroidAdapter(
+        private vararg val factories: ViewHolderFactory
+) : ListAdapter<DroidItem, DroidViewHolder<DroidItem, *>>(
+        object : DiffUtil.ItemCallback<DroidItem>() {
 
-    override fun areItemsTheSame(oldItem: T, newItem: T): Boolean =
-            oldItem.areTheSame(newItem)
+            override fun areItemsTheSame(oldItem: DroidItem, newItem: DroidItem): Boolean =
+                    oldItem.areTheSame(newItem)
 
-    override fun areContentsTheSame(oldItem: T, newItem: T): Boolean =
-            oldItem.haveTheSameContent(newItem)
+            override fun areContentsTheSame(oldItem: DroidItem, newItem: DroidItem): Boolean =
+                    oldItem.haveTheSameContent(newItem)
 
-    override fun getChangePayload(oldItem: T, newItem: T): Any? =
-            oldItem.getPayload(newItem)
-}) {
-
+            override fun getChangePayload(oldItem: DroidItem, newItem: DroidItem): Any? =
+                    oldItem.getPayload(newItem)
+        }
+) {
 
     override fun getItemViewType(position: Int): Int {
         factories.forEachIndexed { i, factory ->
@@ -38,11 +39,14 @@ open class DroidAdapter<T : DroidItem>(
         throw RuntimeException("Error defining default factory")
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DroidViewHolder<T, *> =
+    override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+    ): DroidViewHolder<DroidItem, *> =
             factories[viewType].factory(parent).also { it.adapter = this }
 
     override fun onBindViewHolder(
-            holder: DroidViewHolder<T, *>,
+            holder: DroidViewHolder<DroidItem, *>,
             position: Int
     ) {
 
@@ -54,7 +58,7 @@ open class DroidAdapter<T : DroidItem>(
     }
 
     override fun onBindViewHolder(
-            holder: DroidViewHolder<T, *>,
+            holder: DroidViewHolder<DroidItem, *>,
             position: Int,
             payloads: MutableList<Any>
     ) {
@@ -70,9 +74,9 @@ open class DroidAdapter<T : DroidItem>(
             holder.bindRawPayload(item, position, payloads)
     }
 
-    fun getItems(): List<T> {
+    fun getItems(): List<DroidItem> {
 
-        val list = mutableListOf<T>()
+        val list = mutableListOf<DroidItem>()
         for (i in 0 until this.itemCount)
             list.add(this.getItem(i))
 

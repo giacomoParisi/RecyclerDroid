@@ -22,7 +22,7 @@ private constructor(itemView: View) :
             this(factory(LayoutInflater.from(parent.context), parent, false))
 
     lateinit var item: T
-    lateinit var adapter: DroidAdapter<T>
+    lateinit var adapter: DroidAdapter
 
     abstract fun bind(t: T, position: Int)
 

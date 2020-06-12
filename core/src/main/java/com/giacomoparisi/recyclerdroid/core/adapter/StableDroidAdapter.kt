@@ -4,11 +4,9 @@ import com.giacomoparisi.recyclerdroid.core.DroidAdapter
 import com.giacomoparisi.recyclerdroid.core.StableDroidItem
 import com.giacomoparisi.recyclerdroid.core.ViewHolderFactory
 
-open class StableDroidAdapter<T : StableDroidItem>(
-        vararg factories: ViewHolderFactory<T>
-) : DroidAdapter<T>(*factories) {
-
-
+open class StableDroidAdapter(
+        vararg factories: ViewHolderFactory
+) : DroidAdapter(*factories) {
 
     init {
 
@@ -16,6 +14,8 @@ open class StableDroidAdapter<T : StableDroidItem>(
 
     }
 
-    override fun getItemId(position: Int): Long = getItems()[position].stableId(position)
+    override fun getItemId(position: Int): Long =
+            (getItems()[position] as? StableDroidItem)
+                    ?.stableId(position) ?: position.hashCode().toLong()
 
 }
