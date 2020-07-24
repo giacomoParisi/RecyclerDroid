@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
  */
 
 data class ViewHolderFactory(
-        val factory: (ViewGroup) -> DroidViewHolder<DroidItem, Any>,
+        val factory: (ViewGroup) -> DroidViewHolder<out DroidItem, Any>,
         val selector: (Int, DroidItem) -> Boolean
 )
 
@@ -39,11 +39,13 @@ open class DroidAdapter(
         throw RuntimeException("Error defining default factory")
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
     ): DroidViewHolder<DroidItem, Any> =
-            factories[viewType].factory(parent).also { it.adapter = this }
+            (factories[viewType].factory(parent) as DroidViewHolder<DroidItem, Any>)
+                    .also { it.adapter = this }
 
     override fun onBindViewHolder(
             holder: DroidViewHolder<DroidItem, Any>,

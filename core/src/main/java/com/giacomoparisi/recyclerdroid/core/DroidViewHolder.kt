@@ -35,6 +35,7 @@ abstract class DroidViewHolder<T : DroidItem, P: Any> private constructor(
 
     abstract fun bind(t: T, position: Int)
 
+    @Suppress("UNCHECKED_CAST")
     fun bindRawPayload(t: T, position: Int, payloads: List<Any>) {
 
         val payloadObjects = payloads.flatMap { (it as? List<P>).orEmpty() }
