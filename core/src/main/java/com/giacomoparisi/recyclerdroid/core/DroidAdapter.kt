@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.ListAdapter
  */
 
 data class ViewHolderFactory(
-        val factory: (ViewGroup) -> DroidViewHolder<DroidItem, *>,
+        val factory: (ViewGroup) -> DroidViewHolder<DroidItem, Any>,
         val selector: (Int, DroidItem) -> Boolean
 )
 
 open class DroidAdapter(
         private vararg val factories: ViewHolderFactory
-) : ListAdapter<DroidItem, DroidViewHolder<DroidItem, *>>(
+) : ListAdapter<DroidItem, DroidViewHolder<DroidItem, Any>>(
         object : DiffUtil.ItemCallback<DroidItem>() {
 
             override fun areItemsTheSame(oldItem: DroidItem, newItem: DroidItem): Boolean =
@@ -42,11 +42,11 @@ open class DroidAdapter(
     override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-    ): DroidViewHolder<DroidItem, *> =
+    ): DroidViewHolder<DroidItem, Any> =
             factories[viewType].factory(parent).also { it.adapter = this }
 
     override fun onBindViewHolder(
-            holder: DroidViewHolder<DroidItem, *>,
+            holder: DroidViewHolder<DroidItem, Any>,
             position: Int
     ) {
 
@@ -58,7 +58,7 @@ open class DroidAdapter(
     }
 
     override fun onBindViewHolder(
-            holder: DroidViewHolder<DroidItem, *>,
+            holder: DroidViewHolder<DroidItem, Any>,
             position: Int,
             payloads: MutableList<Any>
     ) {
