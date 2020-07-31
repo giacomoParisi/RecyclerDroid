@@ -10,8 +10,14 @@ interface DroidItem {
 
 }
 
-interface StableDroidItem: DroidItem {
+interface StableDroidItem : DroidItem {
 
     fun stableId(position: Int): Long
 
 }
+
+inline fun <reified T : DroidItem> T.compare(other: DroidItem, compare: (T) -> Boolean): Boolean =
+        when (other) {
+            is T -> compare(other)
+            else -> false
+        }
