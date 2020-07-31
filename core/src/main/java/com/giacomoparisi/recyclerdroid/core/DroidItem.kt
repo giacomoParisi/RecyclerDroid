@@ -16,8 +16,14 @@ interface StableDroidItem : DroidItem {
 
 }
 
-inline fun <reified T : DroidItem> T.compare(other: DroidItem, compare: (T) -> Boolean): Boolean =
-        when (other) {
-            is T -> compare(other)
+inline fun <reified T : DroidItem> DroidItem.compare(compare: (T) -> Boolean): Boolean =
+        when (this) {
+            is T -> compare(this)
             else -> false
+        }
+
+inline fun <reified T : DroidItem, P> DroidItem.getPayload(payload: (T) -> List<P>): List<P> =
+        when (this) {
+            is T -> payload(this)
+            else -> emptyList()
         }
