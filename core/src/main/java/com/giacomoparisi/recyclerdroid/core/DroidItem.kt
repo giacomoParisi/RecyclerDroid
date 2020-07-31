@@ -22,7 +22,7 @@ inline fun <reified T : DroidItem> DroidItem.compare(compare: (T) -> Boolean): B
             else -> false
         }
 
-inline fun <reified T : DroidItem, P> DroidItem.getPayload(payload: (T) -> List<P>): List<P> =
+inline fun <reified T : DroidItem, P> DroidItem.providePayload(payload: (T) -> List<P>): List<P> =
         when (this) {
             is T -> payload(this)
             else -> emptyList()
