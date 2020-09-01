@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
  * https://github.com/giacomoParisi
  */
 
-abstract class DroidViewHolder<T : DroidItem, P: Any> private constructor(
+abstract class DroidViewHolder<T : DroidItem<P>, P: Any> private constructor(
         itemView: View
 ) : RecyclerView.ViewHolder(itemView) {
 

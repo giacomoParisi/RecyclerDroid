@@ -12,7 +12,7 @@ import com.giacomoparisi.recyclerdroid.core.DroidViewHolder
  *
  * An empty viewHolder that allows to render a layout that does not need any configuration
  */
-open class EmptyViewHolder<T : DroidItem>(
+open class EmptyViewHolder<T : DroidItem<Unit>>(
         parent: ViewGroup,
         @LayoutRes layoutId: Int
 ) : DroidViewHolder<T, Unit>(

@@ -1,28 +1,34 @@
 package com.giacomoparisi.recyclerdroid.core
 
-interface DroidItem {
+interface DroidItem<out P: Any> {
 
-    fun areTheSame(other: DroidItem): Boolean
+    fun areTheSame(other: DroidItem<Any>): Boolean
 
-    fun haveTheSameContent(other: DroidItem): Boolean
+    fun haveTheSameContent(other: DroidItem<Any>): Boolean
 
-    fun getPayload(other: DroidItem): List<*>
+    fun getPayload(other: DroidItem<Any>): List<P>
 
 }
 
-interface StableDroidItem : DroidItem {
+interface StableDroidItem<P: Any> : DroidItem<P> {
 
     fun stableId(position: Int): Long
 
 }
 
-inline fun <reified T : DroidItem> DroidItem.compare(compare: (T) -> Boolean): Boolean =
+
+
+inline fun <reified T : DroidItem<Any>> DroidItem<Any>.compare(
+        compare: (T) -> Boolean
+): Boolean =
         when (this) {
             is T -> compare(this)
             else -> false
         }
 
-inline fun <reified T : DroidItem, P> DroidItem.providePayload(payload: (T) -> List<P>): List<P> =
+inline fun <P, reified T : DroidItem<P>> DroidItem<Any>.providePayload(
+        payload: (T) -> List<P>
+): List<P> =
         when (this) {
             is T -> payload(this)
             else -> emptyList()
