@@ -1,5 +1,7 @@
 package com.giacomoparisi.recyclerdroid.core
 
+import com.giacomoparisi.recyclerdroid.core.adapter.StableDroidAdapter
+
 interface DroidItem<out P: Any> {
 
     fun areTheSame(other: DroidItem<Any>): Boolean
@@ -12,7 +14,7 @@ interface DroidItem<out P: Any> {
 
 interface StableDroidItem<P: Any> : DroidItem<P> {
 
-    fun stableId(position: Int): Long
+    fun stableId(adapter: StableDroidAdapter, position: Int): Long
 
 }
 

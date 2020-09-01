@@ -16,6 +16,6 @@ open class StableDroidAdapter(
 
     override fun getItemId(position: Int): Long =
             (getItems()[position] as? StableDroidItem)
-                    ?.stableId(position) ?: position.hashCode().toLong()
+                    ?.stableId(this, position) ?: position.hashCode().toLong()
 
 }
