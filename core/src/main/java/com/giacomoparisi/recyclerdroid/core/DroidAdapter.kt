@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
  */
 
 data class ViewHolderFactory(
-        val factory: (ViewGroup) -> DroidViewHolder<out DroidItem<Any>, Any>,
+        val factory: (ViewGroup) -> DroidViewHolder<out DroidItem<Any>, out Any>,
         val selector: (Int, DroidItem<Any>) -> Boolean
 )
 
