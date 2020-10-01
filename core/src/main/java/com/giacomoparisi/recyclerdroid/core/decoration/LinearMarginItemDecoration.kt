@@ -17,21 +17,26 @@ class LinearMarginItemDecoration(
                                 parent: RecyclerView, state: RecyclerView.State) {
 
         val index = parent.getChildAdapterPosition(view)
-        val childCount = parent.adapter?.itemCount ?: 0
 
-        val info =
-                LinearDecoratorInfo(
-                        index,
-                        childCount,
-                        (parent.adapter as DroidAdapter).getItems()[index]
-                )
+        (parent.adapter as DroidAdapter).getItems().getOrNull(index)
+                ?.let {
 
-        with(outRect) {
-            top = topMargin(info)
-            left = startMargin(info)
-            right = endMargin(info)
-            bottom = bottomMargin(info)
-        }
+                    val childCount = parent.adapter?.itemCount ?: 0
+
+                    val info =
+                            LinearDecoratorInfo(
+                                    index,
+                                    childCount,
+                                    it
+                            )
+
+                    with(outRect) {
+                        top = topMargin(info)
+                        left = startMargin(info)
+                        right = endMargin(info)
+                        bottom = bottomMargin(info)
+                    }
+                }
     }
 }
 
