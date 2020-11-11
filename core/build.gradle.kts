@@ -101,11 +101,37 @@ publishing {
                     url.set(Library.pomScmUrl)
                 }
 
-                val deps =
-                        configurations.implementation.get().allDependencies +
-                                configurations.compile.get().allDependencies
+                withXml {
 
-                deps.forEach { dependencies.add("implementation", it) }
+                    val dependenciesNode = asNode().appendNode("dependencies")
+
+                    (configurations.releaseImplementation.get().allDependencies +
+                            configurations.releaseCompile.get().allDependencies)
+                            .forEach {
+
+                                val groupId =
+                                        if (it.group == rootProject.name) Library.group else it.group
+
+                                val artifactId = it.name
+
+                                val version =
+                                        if (it.group == rootProject.name) AndroidConfig.version_name
+                                        else it.version
+
+                                if (groupId != null && version != null) {
+
+                                    val dependencyNode =
+                                            dependenciesNode.appendNode("dependency")
+
+                                    dependencyNode.appendNode("groupId", groupId)
+                                    dependencyNode.appendNode("artifactId", artifactId)
+                                    dependencyNode.appendNode("version", version)
+
+                                }
+
+                            }
+
+                }
             }
         }
     }
