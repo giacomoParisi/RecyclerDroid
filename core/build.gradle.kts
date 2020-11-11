@@ -8,7 +8,6 @@ plugins {
     id("maven-publish")
     id("com.github.dcendents.android-maven")
     id("com.jfrog.bintray")
-    id("org.jetbrains.dokka-android")
 
 }
 
@@ -36,18 +35,13 @@ android {
 }
 
 dependencies {
-    implementation(Libs.kotlin_stdlib_jdk7)
-    implementation (Libs.recyclerview)
+    implementation(Kotlin.stdlib.jdk7)
+    implementation(AndroidX.recyclerView)
 }
 
 /* ======== BINTRAY ======== */
 
 tasks {
-
-    val dokka by getting(org.jetbrains.dokka.gradle.DokkaTask::class) {
-        outputFormat = "html"
-        outputDirectory = "$buildDir/dokka"
-    }
 
     val sourcesJar by creating(Jar::class) {
         archiveClassifier.set("sources")
