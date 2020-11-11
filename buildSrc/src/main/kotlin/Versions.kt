@@ -15,7 +15,7 @@ object Versions {
 
     const val org_jetbrains_dokka: String = "0.9.18"
 
-    const val com_android_tools_build_gradle: String = "4.0.1"
+    const val com_android_tools_build_gradle: String = "4.1.1"
 
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.7.0"
 
@@ -25,16 +25,16 @@ object Versions {
 
     const val recyclerview: String = "1.1.0"
 
-    const val lint_gradle: String = "27.0.1"
+    const val lint_gradle: String = "27.1.1"
 
-    const val aapt2: String = "4.0.1-6197926"
+    const val aapt2: String = "4.1.1-6503028"
 
     /**
-     * Current version: "6.5"
+     * Current version: "6.7"
      * See issue 19: How to update Gradle itself?
      * https://github.com/jmfayard/buildSrcVersions/issues/19
      */
-    const val gradleLatestVersion: String = "6.6.1"
+    const val gradleLatestVersion: String = "6.7"
 }
 
 /**
