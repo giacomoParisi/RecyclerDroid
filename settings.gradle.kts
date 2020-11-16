@@ -7,4 +7,4 @@ buildscript {
 
 bootstrapRefreshVersions()
 
-include(":core")
+include(":core", ":sample")
