@@ -1,3 +1,4 @@
+import GradlePlugins.android
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
@@ -6,7 +7,6 @@ plugins {
     kotlin("kapt")
     kotlin("android.extensions")
     id("maven-publish")
-    id("com.github.dcendents.android-maven")
     id("com.jfrog.bintray")
 
 }
@@ -35,8 +35,10 @@ android {
 }
 
 dependencies {
-    implementation(Kotlin.stdlib.jdk7)
+
+    implementation(Kotlin.stdLib)
     implementation(AndroidX.recyclerView)
+
 }
 
 /* ======== BINTRAY ======== */

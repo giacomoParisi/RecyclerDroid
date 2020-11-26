@@ -36,15 +36,11 @@ android {
 dependencies {
 
     /* --- kotlin --- */
-    implementation(Kotlin.stdlib)
+    implementation(Kotlin.stdLib)
 
     /* --- android --- */
-    implementation(AndroidX.core.ktx)
+    implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
-    implementation(Google.android.material)
+    implementation(Google.material)
 
-    /* --- test --- */
-    testImplementation(Kotlin.Test.junit)
-    androidTestImplementation(AndroidX.Test.Ext.junitKtx)
-    androidTestImplementation(AndroidX.Test.espresso.core)
 }
