@@ -28,6 +28,8 @@ object AndroidX {
 
     const val appCompat: String = "$androidX.appcompat:appcompat:1.2.0"
 
+    const val constraintLayout: String = "$androidX.constraintlayout:constraintlayout:2.0.4"
+
 }
 
 object Google {
