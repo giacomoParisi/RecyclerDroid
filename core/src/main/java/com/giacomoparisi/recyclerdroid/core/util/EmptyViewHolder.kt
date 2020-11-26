@@ -3,7 +3,7 @@ package com.giacomoparisi.recyclerdroid.core.util
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.giacomoparisi.recyclerdroid.core.DroidItem
-import com.giacomoparisi.recyclerdroid.core.DroidViewHolder
+import com.giacomoparisi.recyclerdroid.core.holder.DroidViewHolder
 
 /**
  * @author Giacomo Parisi

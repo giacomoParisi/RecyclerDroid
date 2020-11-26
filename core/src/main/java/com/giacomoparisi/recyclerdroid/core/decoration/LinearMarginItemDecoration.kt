@@ -3,7 +3,7 @@ package com.giacomoparisi.recyclerdroid.core.decoration
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.giacomoparisi.recyclerdroid.core.DroidAdapter
+import com.giacomoparisi.recyclerdroid.core.adapter.DroidAdapter
 import com.giacomoparisi.recyclerdroid.core.DroidItem
 
 class LinearMarginItemDecoration(

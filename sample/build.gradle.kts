@@ -42,6 +42,8 @@ dependencies {
 
     /* --- kotlin --- */
     implementation(Kotlin.stdLib)
+    implementation(Kotlin.Coroutines.core)
+    implementation(Kotlin.Coroutines.android)
 
     /* --- android --- */
     implementation(AndroidX.coreKtx)
@@ -51,6 +53,9 @@ dependencies {
     implementation(Google.material)
     implementation(AndroidX.Navigation.fragmentKtx)
     implementation(AndroidX.Navigation.uiKtx)
+    implementation(AndroidX.paging)
+    implementation(AndroidX.Lifecycle.viewModel)
+    implementation(AndroidX.Lifecycle.liveData)
 
 
 }

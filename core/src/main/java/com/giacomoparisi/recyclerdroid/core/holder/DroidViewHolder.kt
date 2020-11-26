@@ -1,4 +1,4 @@
-package com.giacomoparisi.recyclerdroid.core
+package com.giacomoparisi.recyclerdroid.core.holder
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,6 +9,9 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.giacomoparisi.recyclerdroid.core.DroidItem
+import com.giacomoparisi.recyclerdroid.core.adapter.DroidAdapter
+import com.giacomoparisi.recyclerdroid.core.adapter.IDroidAdapter
 
 /**
  * Created by Giacomo Parisi on 10/04/17.
@@ -31,12 +34,12 @@ abstract class DroidViewHolder<T : DroidItem<P>, P: Any> private constructor(
             )
 
     lateinit var item: T
-    lateinit var adapter: DroidAdapter
+    lateinit var adapter: IDroidAdapter
 
     abstract fun bind(t: T, position: Int)
 
     @Suppress("UNCHECKED_CAST")
-    fun bindRawPayload(t: T, position: Int, payloads: List<Any>) {
+    fun bindRawPayload(t: T, position: Int, payloads: List<Any>): Unit {
 
         val payloadObjects = payloads.flatMap { (it as? List<P>).orEmpty() }
 
@@ -46,7 +49,7 @@ abstract class DroidViewHolder<T : DroidItem<P>, P: Any> private constructor(
             bind(t, position, payloadObjects)
     }
 
-    open fun bind(t: T, position: Int, payloads: List<P>) {}
+    open fun bind(t: T, position: Int, payloads: List<P>): Unit = Unit
 
     val context: Context get() = itemView.context
 
@@ -56,13 +59,13 @@ abstract class DroidViewHolder<T : DroidItem<P>, P: Any> private constructor(
     fun getString(@StringRes id: Int, vararg formatArgs: Any): String =
             context.getString(id, formatArgs)
 
-    fun getColor(@ColorRes id: Int) =
+    fun getColor(@ColorRes id: Int): Int =
             ContextCompat.getColor(context, id)
 
     fun <T : View> Int.getView(): T =
             this@DroidViewHolder.itemView.findViewById(this)
 
-    fun getItems() = adapter.getItems()
+    fun getItems(): List<DroidItem<Any>> = adapter.getItems()
 
-    fun getListSize() = getItems().count()
+    fun getListSize(): Int = getItems().count()
 }

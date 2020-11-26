@@ -1,18 +1,16 @@
-package com.giacomoparisi.recyclerdroid.core
+package com.giacomoparisi.recyclerdroid.core.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.giacomoparisi.recyclerdroid.core.DroidItem
+import com.giacomoparisi.recyclerdroid.core.holder.DroidViewHolder
+import com.giacomoparisi.recyclerdroid.core.holder.ViewHolderFactory
 
 /**
  * Created by Giacomo Parisi on 07/07/2017.
  * https://github.com/giacomoParisi
  */
-
-data class ViewHolderFactory(
-        val factory: (ViewGroup) -> DroidViewHolder<out DroidItem<Any>, out Any>,
-        val selector: (Int, DroidItem<Any>) -> Boolean
-)
 
 open class DroidAdapter(
         private vararg val factories: ViewHolderFactory
@@ -34,10 +32,10 @@ open class DroidAdapter(
             override fun getChangePayload(
                     oldItem: DroidItem<Any>,
                     newItem: DroidItem<Any>
-            ): Any? =
+            ): Any =
                     oldItem.getPayload(newItem)
         }
-) {
+), IDroidAdapter {
 
     override fun getItemViewType(position: Int): Int {
         factories.forEachIndexed { i, factory ->
@@ -85,14 +83,15 @@ open class DroidAdapter(
             holder.bindRawPayload(item, position, payloads)
     }
 
-    fun getItems(): List<DroidItem<Any>> {
+    override fun getItems(): List<DroidItem<Any>> {
 
         val list = mutableListOf<DroidItem<Any>>()
-        for (i in 0 until this.itemCount)
-            list.add(this.getItem(i))
+        for (i in 0 until itemCount)
+            list.add(getItem(i))
 
         return list.toList()
     }
+
 
     /* ---- paging ----- */
 

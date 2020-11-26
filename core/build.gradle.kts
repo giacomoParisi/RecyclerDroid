@@ -33,8 +33,12 @@ android {
 
 dependencies {
 
+    /* --- kotlin --- */
     implementation(Kotlin.stdLib)
+
+    /* --- android --- */
     implementation(AndroidX.recyclerView)
+    implementation(AndroidX.paging)
 
 }
 

@@ -3,15 +3,22 @@ package com.giacomoparisi.recyclerdroid.sample.paging
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.giacomoparisi.recyclerdroid.core.DroidAdapter
+import com.giacomoparisi.recyclerdroid.core.adapter.DroidAdapter
+import com.giacomoparisi.recyclerdroid.core.adapter.DroidPagingAdapter
 import com.giacomoparisi.recyclerdroid.sample.R
 import com.giacomoparisi.recyclerdroid.sample.databinding.PagingBinding
 import com.giacomoparisi.recyclerdroid.sample.item.SampleItem
 import com.giacomoparisi.recyclerdroid.sample.item.SampleViewHolder
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class PagingFragment : Fragment(R.layout.paging) {
+
+    private val viewModel: PagingViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,7 +31,7 @@ class PagingFragment : Fragment(R.layout.paging) {
 
     private fun setupRecyclerView(binding: PagingBinding): Unit {
 
-        val droidAdapter = DroidAdapter(SampleViewHolder.factory())
+        val droidAdapter = DroidPagingAdapter(SampleViewHolder.factory())
 
         binding.recyclerView.apply {
 
@@ -38,11 +45,12 @@ class PagingFragment : Fragment(R.layout.paging) {
 
         }
 
-        droidAdapter.submitList(buildItem(10))
+        lifecycleScope.launch {
+
+            viewModel.items.collectLatest { droidAdapter.submitDroidItems(it) }
+
+        }
 
     }
-
-    private fun buildItem(count: Int): List<SampleItem> =
-            (1..count).map { SampleItem(it) }
 
 }

@@ -14,7 +14,21 @@ object Kotlin {
 
     internal const val version: String = "1.4.20"
 
-    const val stdLib: String = "org.jetbrains.kotlin:kotlin-stdlib:$version"
+    private const val kotlin: String = "org.jetbrains.kotlin:"
+
+    const val stdLib: String = "${kotlin}kotlin-stdlib:$version"
+
+    object Coroutines {
+
+        private const val version: String = "1.4.1"
+
+        private const val coroutine: String = "org.jetbrains.kotlinx:kotlinx-coroutines"
+
+        const val core: String = "$coroutine-core:$version"
+
+        const val android: String = "$coroutine-android:$version"
+
+    }
 
 }
 
@@ -30,6 +44,8 @@ object AndroidX {
 
     const val constraintLayout: String = "$androidX.constraintlayout:constraintlayout:2.0.4"
 
+    const val paging: String = "$androidX.paging:paging-runtime:3.0.0-alpha09"
+
     object Navigation {
 
         private const val navigation: String = "$androidX.navigation:navigation"
@@ -38,6 +54,18 @@ object AndroidX {
 
         const val fragmentKtx: String = "$navigation-fragment-ktx:$navigationVersion"
         const val uiKtx: String = "$navigation-ui-ktx:$navigationVersion"
+
+    }
+
+    object Lifecycle {
+
+        private const val version: String = "2.2.0"
+
+        private const val lifecycle: String = "$androidX.lifecycle:lifecycle"
+
+        const val viewModel: String = "$lifecycle-viewmodel-ktx:$version"
+
+        const val liveData: String = "$lifecycle-livedata-ktx:$version"
 
     }
 
