@@ -37,6 +37,9 @@ android {
 
 dependencies {
 
+    /* --- recycler droid --- */
+    implementation(project(":core"))
+
     /* --- kotlin --- */
     implementation(Kotlin.stdLib)
 
@@ -44,6 +47,10 @@ dependencies {
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.constraintLayout)
+    implementation(AndroidX.recyclerView)
     implementation(Google.material)
+    implementation(AndroidX.Navigation.fragmentKtx)
+    implementation(AndroidX.Navigation.uiKtx)
+
 
 }

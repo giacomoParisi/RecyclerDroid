@@ -30,6 +30,17 @@ object AndroidX {
 
     const val constraintLayout: String = "$androidX.constraintlayout:constraintlayout:2.0.4"
 
+    object Navigation {
+
+        private const val navigation: String = "$androidX.navigation:navigation"
+
+        private const val navigationVersion: String = "2.3.1"
+
+        const val fragmentKtx: String = "$navigation-fragment-ktx:$navigationVersion"
+        const val uiKtx: String = "$navigation-ui-ktx:$navigationVersion"
+
+    }
+
 }
 
 object Google {
