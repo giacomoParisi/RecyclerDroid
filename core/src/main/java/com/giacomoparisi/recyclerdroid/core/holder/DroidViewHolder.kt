@@ -1,16 +1,10 @@
 package com.giacomoparisi.recyclerdroid.core.holder
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
-import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import com.giacomoparisi.recyclerdroid.core.DroidItem
-import com.giacomoparisi.recyclerdroid.core.adapter.DroidAdapter
 import com.giacomoparisi.recyclerdroid.core.adapter.IDroidAdapter
 
 /**
@@ -18,9 +12,9 @@ import com.giacomoparisi.recyclerdroid.core.adapter.IDroidAdapter
  * https://github.com/giacomoParisi
  */
 
-abstract class DroidViewHolder<T : DroidItem<P>, P: Any> private constructor(
+abstract class DroidViewHolder<T : DroidItem<P>, P : Any> private constructor(
         itemView: View
-) : RecyclerView.ViewHolder(itemView) {
+) : BaseDroidViewHolder<T>(itemView) {
 
     constructor(parent: ViewGroup, factory: (LayoutInflater, ViewGroup, Boolean) -> View) :
             this(factory(LayoutInflater.from(parent.context), parent, false))
@@ -36,34 +30,20 @@ abstract class DroidViewHolder<T : DroidItem<P>, P: Any> private constructor(
     lateinit var item: T
     lateinit var adapter: IDroidAdapter
 
-    abstract fun bind(t: T, position: Int)
+    abstract fun bind(item: T, position: Int)
 
     @Suppress("UNCHECKED_CAST")
-    fun bindRawPayload(t: T, position: Int, payloads: List<Any>): Unit {
+    fun bindRawPayload(item: T, position: Int, payloads: List<Any>): Unit {
 
         val payloadObjects = payloads.flatMap { (it as? List<P>).orEmpty() }
 
         if (payloadObjects.isEmpty())
-            bind(t, position)
+            bind(item, position)
         else
-            bind(t, position, payloadObjects)
+            bind(item, position, payloadObjects)
     }
 
-    open fun bind(t: T, position: Int, payloads: List<P>): Unit = Unit
-
-    val context: Context get() = itemView.context
-
-    fun getString(@StringRes id: Int): String =
-            context.getString(id)
-
-    fun getString(@StringRes id: Int, vararg formatArgs: Any): String =
-            context.getString(id, formatArgs)
-
-    fun getColor(@ColorRes id: Int): Int =
-            ContextCompat.getColor(context, id)
-
-    fun <T : View> Int.getView(): T =
-            this@DroidViewHolder.itemView.findViewById(this)
+    open fun bind(item: T, position: Int, payloads: List<P>): Unit = Unit
 
     fun getItems(): List<DroidItem<Any>> = adapter.getItems()
 

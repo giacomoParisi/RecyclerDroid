@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 class PagingViewModel : ViewModel() {
 
     val items: Flow<PagingData<SampleItem>> =
-            Pager(PagingConfig(pageSize = 20)) { SamplePagingSource() }.flow
+            Pager(PagingConfig(pageSize = 20, initialLoadSize = 30)) { SamplePagingSource() }.flow
                     .cachedIn(viewModelScope)
 
 }

@@ -3,14 +3,13 @@ package com.giacomoparisi.recyclerdroid.core.adapter
 import android.view.ViewGroup
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
-import androidx.paging.map
 import androidx.recyclerview.widget.DiffUtil
 import com.giacomoparisi.recyclerdroid.core.DroidItem
 import com.giacomoparisi.recyclerdroid.core.holder.DroidViewHolder
-import com.giacomoparisi.recyclerdroid.core.holder.ViewHolderFactory
+import com.giacomoparisi.recyclerdroid.core.holder.DroidViewHolderFactory
 
 open class DroidPagingAdapter(
-        private vararg val factories: ViewHolderFactory
+        private vararg val factories: DroidViewHolderFactory
 ) : PagingDataAdapter<DroidItem<Any>, DroidViewHolder<DroidItem<Any>, Any>>(
         object : DiffUtil.ItemCallback<DroidItem<Any>>() {
 

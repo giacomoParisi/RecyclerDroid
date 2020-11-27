@@ -1,10 +1,10 @@
 package com.giacomoparisi.recyclerdroid.core.adapter
 
 import com.giacomoparisi.recyclerdroid.core.StableDroidItem
-import com.giacomoparisi.recyclerdroid.core.holder.ViewHolderFactory
+import com.giacomoparisi.recyclerdroid.core.holder.DroidViewHolderFactory
 
 open class StableDroidAdapter(
-        vararg factories: ViewHolderFactory
+        vararg factories: DroidViewHolderFactory
 ) : DroidAdapter(*factories) {
 
     init {

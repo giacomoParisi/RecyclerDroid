@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.giacomoparisi.recyclerdroid.core.DroidItem
 import com.giacomoparisi.recyclerdroid.core.holder.DroidViewHolder
-import com.giacomoparisi.recyclerdroid.core.holder.ViewHolderFactory
+import com.giacomoparisi.recyclerdroid.core.holder.DroidViewHolderFactory
 
 /**
  * Created by Giacomo Parisi on 07/07/2017.
@@ -13,7 +13,7 @@ import com.giacomoparisi.recyclerdroid.core.holder.ViewHolderFactory
  */
 
 open class DroidAdapter(
-        private vararg val factories: ViewHolderFactory
+        private vararg val factories: DroidViewHolderFactory
 ) : ListAdapter<DroidItem<Any>, DroidViewHolder<DroidItem<Any>, Any>>(
         object : DiffUtil.ItemCallback<DroidItem<Any>>() {
 

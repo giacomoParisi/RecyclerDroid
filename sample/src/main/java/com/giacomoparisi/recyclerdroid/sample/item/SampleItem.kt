@@ -5,8 +5,8 @@ import android.widget.TextView
 import com.giacomoparisi.recyclerdroid.core.DroidItem
 import com.giacomoparisi.recyclerdroid.core.compare
 import com.giacomoparisi.recyclerdroid.core.holder.DroidViewHolder
-import com.giacomoparisi.recyclerdroid.core.holder.ViewHolderFactory
-import com.giacomoparisi.recyclerdroid.core.holder.typeCheckViewHolderFactory
+import com.giacomoparisi.recyclerdroid.core.holder.DroidViewHolderFactory
+import com.giacomoparisi.recyclerdroid.core.holder.typeCheckDroidViewHolderFactory
 import com.giacomoparisi.recyclerdroid.sample.R
 
 data class SampleItem(val number: Int) : DroidItem<Unit> {
@@ -33,8 +33,8 @@ class SampleViewHolder(
 
     companion object {
 
-        fun factory(): ViewHolderFactory =
-                typeCheckViewHolderFactory<SampleItem> { SampleViewHolder(it) }
+        fun factory(): DroidViewHolderFactory =
+                typeCheckDroidViewHolderFactory<SampleItem> { SampleViewHolder(it) }
 
     }
 
