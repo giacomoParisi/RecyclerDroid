@@ -1,6 +1,6 @@
 package com.giacomoparisi.recyclerdroid.core.paging
 
-class PagedList<T>(
+class PagedList<out T>(
         val data: List<T>,
         val page: Int,
         val isCompleted: Boolean) {
@@ -14,20 +14,33 @@ class PagedList<T>(
             PagedList(data.map { mapper(it) }, this.page, this.isCompleted)
 
     fun <A> map(mapper: (Int, T) -> A) =
-            PagedList(data.mapIndexed { index, t -> mapper(index, t) }, this.page, this.isCompleted)
+            PagedList(
+                    data.mapIndexed { index, t -> mapper(index, t) },
+                    this.page,
+                    this.isCompleted
+            )
 
     fun <A : Any> mapNotNull(mapper: (T) -> A?) =
             PagedList(data.mapNotNull { mapper(it) }, this.page, this.isCompleted)
 
     fun <A : Any> mapNotNull(mapper: (Int, T) -> A?) =
-            PagedList(data.mapIndexedNotNull { index, t -> mapper(index, t) }, this.page, this.isCompleted)
+            PagedList(
+                    data.mapIndexedNotNull { index, t -> mapper(index, t) },
+                    this.page,
+                    this.isCompleted
+            )
 
-    fun filter(filter: (T) -> Boolean) = PagedList(this.data.filter(filter), this.page, this.isCompleted)
+    fun filter(filter: (T) -> Boolean) = PagedList(
+            this.data.filter(filter),
+            this.page,
+            this.isCompleted
+    )
 
-    fun filterIndexed(filter: (Int, T) -> Boolean) = PagedList(this.data.filterIndexed(filter), this.page, this.isCompleted)
-
-    fun addPage(other: PagedList<T>) =
-            PagedList(this.data.plus(other.data), other.page, other.isCompleted)
+    fun filterIndexed(filter: (Int, T) -> Boolean) = PagedList(
+            this.data.filterIndexed(filter),
+            this.page,
+            this.isCompleted
+    )
 
     companion object {
 
@@ -35,8 +48,12 @@ class PagedList<T>(
          * Create an instance of an empty paged list
          */
         fun <T> empty() = PagedList<T>(emptyList(), -1, false)
+
     }
 }
 
 fun <T> List<T>.toPagedList(page: Int = 0, isCompleted: Boolean = false) =
         PagedList(this, page, isCompleted)
+
+fun <T> PagedList<T>.addPage(other: PagedList<T>) =
+        PagedList(this.data.plus(other.data), other.page, other.isCompleted)
