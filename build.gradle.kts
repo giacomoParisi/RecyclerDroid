@@ -2,21 +2,21 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 buildscript {
-    val kotlin_version by extra("1.4.20")
+
     repositories {
         google()
         jcenter()
     }
+
     dependencies {
 
-        classpath(GradlePlugins.android)
+        classpath(GradlePlugin.Android.get())
 
-        classpath(GradlePlugins.kotlin)
+        classpath(GradlePlugin.KotlinPlugin.get())
 
-        classpath(GradlePlugins.bintray)
+        classpath(GradlePlugin.Bintray.get())
 
-        classpath(GradlePlugins.versions)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath(GradlePlugin.Versions.get())
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -48,10 +48,22 @@ tasks {
 
 tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
 
+    //disallow release candidates as upgradable versions from stable versions
+    rejectVersionIf {
+        isNonStable(candidate.version) && !isNonStable(currentVersion)
+    }
+
     // optional parameters
     checkForGradleUpdate = true
     outputFormatter = "html"
     outputDir = "build/dependencyUpdates"
     reportfileName = "report"
+
 }
 
+fun isNonStable(version: String): Boolean {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+    val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+    val isStable = stableKeyword || regex.matches(version)
+    return isStable.not()
+}

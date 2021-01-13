@@ -1,4 +1,3 @@
-import GradlePlugins.android
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
@@ -34,11 +33,11 @@ android {
 dependencies {
 
     /* --- kotlin --- */
-    implementation(Kotlin.stdLib)
+    implementation(Kotlin.StdLib.get())
 
     /* --- android --- */
-    implementation(AndroidX.recyclerView)
-    implementation(AndroidX.paging)
+    implementation(AndroidX.RecyclerView.get())
+    implementation(AndroidX.Paging.Runtime.get())
 
 }
 

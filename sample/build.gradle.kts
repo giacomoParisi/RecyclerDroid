@@ -41,21 +41,21 @@ dependencies {
     implementation(project(":core"))
 
     /* --- kotlin --- */
-    implementation(Kotlin.stdLib)
-    implementation(Kotlin.Coroutines.core)
-    implementation(Kotlin.Coroutines.android)
+    implementation(Kotlin.StdLib.get())
+    implementation(KotlinX.Coroutines.Core.get())
+    implementation(KotlinX.Coroutines.Android.get())
 
     /* --- android --- */
-    implementation(AndroidX.coreKtx)
-    implementation(AndroidX.appCompat)
-    implementation(AndroidX.constraintLayout)
-    implementation(AndroidX.recyclerView)
-    implementation(Google.material)
-    implementation(AndroidX.Navigation.fragmentKtx)
-    implementation(AndroidX.Navigation.uiKtx)
-    implementation(AndroidX.paging)
-    implementation(AndroidX.Lifecycle.viewModel)
-    implementation(AndroidX.Lifecycle.liveData)
+    implementation(AndroidX.Core.CoreKtx.get())
+    implementation(AndroidX.AppCompat.get())
+    implementation(AndroidX.ConstraintLayout.get())
+    implementation(AndroidX.RecyclerView.get())
+    implementation(Google.Material.get())
+    implementation(AndroidX.Navigation.FragmentKtx.get())
+    implementation(AndroidX.Navigation.UIKtx.get())
+    implementation(AndroidX.Paging.Runtime.get())
+    implementation(AndroidX.Lifecycle.ViewModelKtx.get())
+    implementation(AndroidX.Lifecycle.LiveDataKtx.get())
 
 
 }
