@@ -13,7 +13,7 @@ class PagedList<out T>(
     fun <A> map(mapper: (T) -> A) =
             PagedList(data.map { mapper(it) }, this.page, this.isCompleted)
 
-    fun <A> map(mapper: (Int, T) -> A) =
+    fun <A> mapIndexed(mapper: (Int, T) -> A) =
             PagedList(
                     data.mapIndexed { index, t -> mapper(index, t) },
                     this.page,
@@ -23,7 +23,7 @@ class PagedList<out T>(
     fun <A : Any> mapNotNull(mapper: (T) -> A?) =
             PagedList(data.mapNotNull { mapper(it) }, this.page, this.isCompleted)
 
-    fun <A : Any> mapNotNull(mapper: (Int, T) -> A?) =
+    fun <A : Any> mapIndexedNotNull(mapper: (Int, T) -> A?) =
             PagedList(
                     data.mapIndexedNotNull { index, t -> mapper(index, t) },
                     this.page,
