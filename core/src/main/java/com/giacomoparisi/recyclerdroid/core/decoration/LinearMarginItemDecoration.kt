@@ -3,8 +3,8 @@ package com.giacomoparisi.recyclerdroid.core.decoration
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.giacomoparisi.recyclerdroid.core.adapter.DroidAdapter
 import com.giacomoparisi.recyclerdroid.core.DroidItem
+import com.giacomoparisi.recyclerdroid.core.adapter.DroidAdapter
 
 class LinearMarginItemDecoration(
         private val topMargin: (LinearDecoratorInfo) -> Int = { 0 },
@@ -17,17 +17,22 @@ class LinearMarginItemDecoration(
                                 parent: RecyclerView, state: RecyclerView.State) {
 
         val index = parent.getChildAdapterPosition(view)
+        val adapter = parent.adapter as DroidAdapter
 
-        (parent.adapter as DroidAdapter).getItems().getOrNull(index)
+        adapter.getItems().getOrNull(index)
                 ?.let {
 
                     val childCount = parent.adapter?.itemCount ?: 0
+                    val previous = adapter.getItems().getOrNull(index - 1)
+                    val next = adapter.getItems().getOrNull(index + 1)
 
                     val info =
                             LinearDecoratorInfo(
-                                    index,
-                                    childCount,
-                                    it
+                                    index = index,
+                                    itemCount = childCount,
+                                    previous = previous,
+                                    item = it,
+                                    next = next
                             )
 
                     with(outRect) {
@@ -40,7 +45,13 @@ class LinearMarginItemDecoration(
     }
 }
 
-data class LinearDecoratorInfo(val index: Int, val itemCount: Int, val item: DroidItem<Any>) {
+data class LinearDecoratorInfo(
+        val index: Int,
+        val itemCount: Int,
+        val previous: DroidItem<Any>?,
+        val item: DroidItem<Any>,
+        val next: DroidItem<Any>?,
+) {
 
     fun isFirst(trueMargin: Int, falseMargin: Int): Int =
             if (index == 0) trueMargin else falseMargin
@@ -52,10 +63,18 @@ data class LinearDecoratorInfo(val index: Int, val itemCount: Int, val item: Dro
     fun isLast(trueMargin: Int, falseMargin: Int): Int =
             if (index == (itemCount - 1)) trueMargin else falseMargin
 
+
     inline fun <reified T : DroidItem<Any>> isOfType(trueMargin: Int, falseMargin: Int): Int =
             if (item is T) trueMargin else falseMargin
 
     inline fun <reified T : DroidItem<Any>> isOfType(): Boolean = item is T
+
+
+    inline fun <reified T : DroidItem<Any>> isFirstOfType(): Boolean =
+            previous == null || previous !is T
+
+    inline fun <reified T : DroidItem<Any>> isLastOfType(): Boolean =
+            next == null || next !is T
 
 }
 
