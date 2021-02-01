@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.giacomoparisi.recyclerdroid.core.DroidItem
 import com.giacomoparisi.recyclerdroid.core.holder.DroidViewHolder
 import com.giacomoparisi.recyclerdroid.core.holder.DroidViewHolderFactory
+import com.giacomoparisi.recyclerdroid.core.paging.PagedList
 
 /**
  * Created by Giacomo Parisi on 07/07/2017.
@@ -36,6 +37,8 @@ open class DroidAdapter(
                     oldItem.getPayload(newItem)
         }
 ), IDroidAdapter {
+
+    private var items: PagedList<DroidItem<Any>>? = null
 
     override fun getItemViewType(position: Int): Int {
         factories.forEachIndexed { i, factory ->
@@ -83,22 +86,26 @@ open class DroidAdapter(
             holder.bindRawPayload(item, position, payloads)
     }
 
-    override fun getItems(): List<DroidItem<Any>> {
+    override fun getItems(): List<DroidItem<Any>> = items?.data ?: emptyList()
 
-        val list = mutableListOf<DroidItem<Any>>()
-        for (i in 0 until itemCount)
-            list.add(getItem(i))
+    fun getPagedItems(): PagedList<DroidItem<Any>> = items ?: PagedList.empty()
 
-        return list.toList()
+    override fun submitList(list: MutableList<DroidItem<Any>>?) {
+        items = list?.let { PagedList(it, 0, true) }
+        super.submitList(list)
     }
 
+    fun submitPagedList(list: PagedList<DroidItem<Any>>?) {
+        items = list
+        super.submitList(list?.data)
+    }
 
     /* ---- paging ----- */
 
     var pageListener: (() -> Unit)? = null
     private var lastItemIndex: Int = -1
 
-    private fun handlePaging(position: Int): Unit {
+    private fun handlePaging(position: Int) {
 
         if (position == getItems().size - 1 && lastItemIndex != position) {
             lastItemIndex = position
