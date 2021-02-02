@@ -11,36 +11,39 @@ class PagedList<out T>(
     fun isEmpty() = data.isEmpty()
 
     fun <A> map(mapper: (T) -> A) =
-            PagedList(data.map { mapper(it) }, this.page, this.isCompleted)
+            PagedList(data.map { mapper(it) }, page, isCompleted)
 
     fun <A> mapIndexed(mapper: (Int, T) -> A) =
             PagedList(
                     data.mapIndexed { index, t -> mapper(index, t) },
-                    this.page,
-                    this.isCompleted
+                    page,
+                    isCompleted
             )
 
     fun <A : Any> mapNotNull(mapper: (T) -> A?) =
-            PagedList(data.mapNotNull { mapper(it) }, this.page, this.isCompleted)
+            PagedList(data.mapNotNull { mapper(it) }, page, isCompleted)
 
     fun <A : Any> mapIndexedNotNull(mapper: (Int, T) -> A?) =
             PagedList(
                     data.mapIndexedNotNull { index, t -> mapper(index, t) },
-                    this.page,
-                    this.isCompleted
+                    page,
+                    isCompleted
             )
 
     fun filter(filter: (T) -> Boolean) = PagedList(
-            this.data.filter(filter),
-            this.page,
-            this.isCompleted
+            data.filter(filter),
+            page,
+            isCompleted
     )
 
     fun filterIndexed(filter: (Int, T) -> Boolean) = PagedList(
-            this.data.filterIndexed(filter),
-            this.page,
-            this.isCompleted
+            data.filterIndexed(filter),
+            page,
+            isCompleted
     )
+
+    inline fun <reified R> filterIsInstance(): PagedList<R> =
+            PagedList(data.filterIsInstance<R>(), page, isCompleted)
 
     companion object {
 
@@ -56,4 +59,4 @@ fun <T> List<T>.toPagedList(page: Int = 0, isCompleted: Boolean = false) =
         PagedList(this, page, isCompleted)
 
 fun <T> PagedList<T>.addPage(other: PagedList<T>) =
-        PagedList(this.data.plus(other.data), other.page, other.isCompleted)
+        PagedList(data.plus(other.data), other.page, other.isCompleted)
