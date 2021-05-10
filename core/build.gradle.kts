@@ -7,6 +7,7 @@ plugins {
     id("maven-publish")
 
 }
+group = "com.github.giacomoparisi"
 
 android {
     compileSdk = AndroidConfig.compile_sdk
