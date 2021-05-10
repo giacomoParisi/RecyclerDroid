@@ -6,11 +6,6 @@ object AndroidX {
 
     object FragmentKtx : Dependency("androidx.fragment", "fragment-ktx", "1.2.5")
 
-    object ViewPager2 : Dependency("androidx.viewpager2", "viewpager2", "1.0.0")
-
-    object SwipeRefreshLayout :
-        Dependency("androidx.swiperefreshlayout", "swiperefreshlayout", "1.1.0")
-
     object Core : DependencyGroup("androidx.core", "1.3.2") {
 
         object CoreKtx : Dependency(Core.group, "core-ktx", Core.version)
@@ -39,59 +34,10 @@ object AndroidX {
         object ViewModelKtx :
             Dependency(Lifecycle.group, "lifecycle-viewmodel-ktx", Lifecycle.version)
 
-        object ViewModelSavedState :
-            Dependency(Lifecycle.group, "lifecycle-viewmodel-savedstate", Lifecycle.version)
 
         object LiveDataKtx :
             Dependency(Lifecycle.group, "lifecycle-livedata-ktx", Lifecycle.version)
 
-        object Service : Dependency(Lifecycle.group, "lifecycle-service", Lifecycle.version)
-
-    }
-
-    object Security : DependencyGroup("androidx.security", "1.1.0-alpha02") {
-
-        object CryptoKtx : Dependency(Security.group, "security-crypto-ktx", Security.version)
-
-    }
-
-    object Camera : DependencyIndependentGroup("androidx.camera") {
-
-        object Core : Dependency(Camera.group, "camera-core", "1.0.0-beta12")
-
-        object Camera2 : Dependency(Camera.group, "camera-camera2", "1.0.0-beta12")
-
-        object View : Dependency(Camera.group, "camera-view", "1.0.0-alpha19")
-
-    }
-
-    object ArchCore : DependencyGroup("androidx.arch.core", "2.1.0") {
-
-        object Testing : Dependency(ArchCore.group, "core-testing", ArchCore.version)
-
-    }
-
-    object Hilt : DependencyGroup("androidx.hilt", "1.0.0-alpha02") {
-
-        object LifecycleViewModel : Dependency(Hilt.group, "hilt-lifecycle-viewmodel", Hilt.version)
-
-        object Compiler : Dependency(Hilt.group, "hilt-compiler", Hilt.version)
-
-    }
-
-    object Test : DependencyIndependentGroup("androidx.test") {
-
-        object Ext : DependencyGroup("${Test.group}.ext", "1.1.2") {
-
-            object JunitKtx : Dependency(Ext.group, "junit-ktx", Ext.version)
-
-        }
-
-        object Espresso : DependencyGroup("$group.espresso", "3.3.0") {
-
-            object Core : Dependency(Espresso.group, "espresso-core", Espresso.version)
-
-        }
 
     }
 

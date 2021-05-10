@@ -14,8 +14,6 @@ buildscript {
 
         classpath(GradlePlugin.KotlinPlugin.get())
 
-        classpath(GradlePlugin.Bintray.get())
-
         classpath(GradlePlugin.Versions.get())
 
         // NOTE: Do not place your application dependencies here; they belong
