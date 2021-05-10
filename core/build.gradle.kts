@@ -38,3 +38,18 @@ dependencies {
     implementation(AndroidX.Paging.Runtime.get())
 
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            create<MavenPublication>("release") {
+
+                // You can then customize attributes of the publication as shown below.
+                group = "com.github.giacomoparisi"
+                artifactId = "recycler-droid"
+                version = "1.8.0-beta13"
+            }
+        }
+    }
+}
